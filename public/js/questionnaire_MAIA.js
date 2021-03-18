@@ -31,7 +31,7 @@ var MAIA_noticing = {
         pData.MAIA_02 = data.response.MAIA_02;
         pData.MAIA_03 = data.response.MAIA_03;
         pData.MAIA_04 = data.response.MAIA_04;
-        pData.MAIA_noticing_score = (pData.MAIA_01 + pData.MAIA_02 + pData.MAIA_03 + pData.MAIA_04)/4;
+        pData.MAIA_noticing = (pData.MAIA_01 + pData.MAIA_02 + pData.MAIA_03 + pData.MAIA_04)/4;
     },    
  };
 
@@ -56,7 +56,7 @@ var MAIA_noticing = {
         pData.MAIA_08 = data.response.MAIA_08;
         pData.MAIA_09 = data.response.MAIA_09;
         pData.MAIA_10 = data.response.MAIA_10;
-        pData.MAIA_notdistracting_score = (6 - pData.MAIA_05 + 6 - pData.MAIA_06 + 6 - pData.MAIA_07 + 
+        pData.MAIA_notdistracting = (6 - pData.MAIA_05 + 6 - pData.MAIA_06 + 6 - pData.MAIA_07 + 
                                     6 - pData.MAIA_08 + 6 - pData.MAIA_09 + 6 - pData.MAIA_10)/6;
     },
  };
@@ -80,7 +80,7 @@ var MAIA_noticing = {
         pData.MAIA_13 = data.response.MAIA_13;
         pData.MAIA_14 = data.response.MAIA_14;
         pData.MAIA_15 = data.response.MAIA_15;
-        pData.MAIA_notworrying_score = (6 - pData.MAIA_11 + 6 - pData.MAIA_12 + 
+        pData.MAIA_notworrying = (6 - pData.MAIA_11 + 6 - pData.MAIA_12 + 
             pData.MAIA_13 + pData.MAIA_14 + 6 - pData.MAIA_15)/5;
     },
  };
@@ -108,7 +108,7 @@ var MAIA_noticing = {
         pData.MAIA_20 = data.response.MAIA_20;
         pData.MAIA_21 = data.response.MAIA_21;
         pData.MAIA_22 = data.response.MAIA_22;
-        pData.MAIA_attentionregulation_score = (pData.MAIA_16 + pData.MAIA_17 + pData.MAIA_18 + 
+        pData.MAIA_attentionregulation = (pData.MAIA_16 + pData.MAIA_17 + pData.MAIA_18 + 
             pData.MAIA_19 + pData.MAIA_20 + pData.MAIA_21 + pData.MAIA_22)/7;
     },
  };
@@ -132,7 +132,7 @@ var MAIA_noticing = {
         pData.MAIA_25 = data.response.MAIA_25;
         pData.MAIA_26 = data.response.MAIA_26;
         pData.MAIA_27 = data.response.MAIA_27;
-        pData.MAIA_emoaware_score = (pData.MAIA_23 + pData.MAIA_24 + pData.MAIA_25 + pData.MAIA_26 + pData.MAIA_27)/5;
+        pData.MAIA_emoaware = (pData.MAIA_23 + pData.MAIA_24 + pData.MAIA_25 + pData.MAIA_26 + pData.MAIA_27)/5;
     },
  };
  
@@ -153,7 +153,7 @@ var MAIA_noticing = {
         pData.MAIA_29 = data.response.MAIA_29;
         pData.MAIA_30 = data.response.MAIA_30;
         pData.MAIA_31 = data.response.MAIA_31;
-        pData.MAIA_selfreg_score = (pData.MAIA_28 + pData.MAIA_29 + pData.MAIA_30 + pData.MAIA_31)/4;
+        pData.MAIA_selfreg = (pData.MAIA_28 + pData.MAIA_29 + pData.MAIA_30 + pData.MAIA_31)/4;
     },
  };
 
@@ -172,7 +172,7 @@ var MAIA_noticing = {
         pData.MAIA_32 = data.response.MAIA_32;
         pData.MAIA_33 = data.response.MAIA_33;
         pData.MAIA_34 = data.response.MAIA_34;
-        pData.MAIA_bodylisten_score = (pData.MAIA_32 + pData.MAIA_33 + pData.MAIA_34)/3;
+        pData.MAIA_bodylisten = (pData.MAIA_32 + pData.MAIA_33 + pData.MAIA_34)/3;
     },
  };
 
@@ -191,7 +191,7 @@ var MAIA_noticing = {
         pData.MAIA_35 = data.response.MAIA_35;
         pData.MAIA_36 = data.response.MAIA_36;
         pData.MAIA_37 = data.response.MAIA_37;
-        pData.MAIA_trusting_score = (pData.MAIA_35 + pData.MAIA_36 + pData.MAIA_37)/3;
+        pData.MAIA_trusting = (pData.MAIA_35 + pData.MAIA_36 + pData.MAIA_37)/3;
     },
  };
 
@@ -210,7 +210,7 @@ var MAIA_noticing = {
                 MAIA_emoaware, MAIA_selfreg, MAIA_bodylisten, MAIA_trusting],
     on_timeline_start: function(){resetLogVars();},
     on_timeline_finish: function(){        
-        pData.MAIA_TOTAL_score = pData.MAIA_01 + pData.MAIA_02 + pData.MAIA_03 + pData.MAIA_04 + 
+        pData.MAIA_total = pData.MAIA_01 + pData.MAIA_02 + pData.MAIA_03 + pData.MAIA_04 + 
             6 - pData.MAIA_05 + 6 - pData.MAIA_06 + 
                            6 - pData.MAIA_07 + 6 - pData.MAIA_08 + 6 - pData.MAIA_09 + 6 - pData.MAIA_10 + 6 - pData.MAIA_11 + 
                            6 - pData.MAIA_12 + pData.MAIA_13 + pData.MAIA_14 + 6 - pData.MAIA_15 + pData.MAIA_16 + pData.MAIA_17 + 

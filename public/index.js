@@ -17,12 +17,15 @@ var maintimeline = []; // the main experiment timeline
 maintimeline.push(preload); //helpers.js
 maintimeline.push(welcome_trial); //instructions.js
 
+/* Testing
+maintimeline.push(validateID_node); //getID.js
+maintimeline.push(circle1_instruct);    //run_circletask1.js
+maintimeline.push(circle1_node);    //run_circletask1.js
+*/
 
 maintimeline.push(QC_node); //instructions.js
 maintimeline.push(consent_node); //consent.js
 maintimeline.push(validateID_node); //getID.js
-
-
 
 maintimeline.push(entrain_node);    //entrain.js
 maintimeline.push(practice_node);   //practice1.js

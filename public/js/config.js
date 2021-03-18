@@ -1,6 +1,6 @@
 // experiment main settings
 const EXPERIMENT_START_TIME = new Date().getTime();
-const EZPULSES = 2; // Easy to set all at once
+const EZPULSES = 8; // Easy to set all at once
 const NUMBER_OF_ENTRAIN_PULSES = EZPULSES;
 const NUMBER_OF_PRACTICE_PULSES_1 = EZPULSES;
 const NUMBER_OF_PRACTICE_PULSES_2 = EZPULSES;

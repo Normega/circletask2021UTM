@@ -26,7 +26,10 @@ var circle2_instruct = {
         
     ],
     show_clickable_nav: true,
-    post_trial_gap: 500
+    post_trial_gap: 500,
+    on_finish: function() {
+        staircase_init();
+    }
 };
 
 // instructions if the person fails to track the circle
@@ -65,8 +68,6 @@ var circle2_node = {
         //console.log("Prep Circle 2");
         pData.Block = "Circle2"; 
         pData.NumPulses = NUMBER_OF_PULSES_2;               
-        staircase_init();
-        resetLogVars();
         pData.ChangeType = circle2Trials.pop(); //select 1 from the trial list        
     },   
     loop_function: function(){
