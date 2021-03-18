@@ -124,7 +124,7 @@ var circleTask1 = {
         } else {
             repeatneeded = false;            
         }
-        saveSessionData2(pData.Block);
+        //saveSessionData2(pData.Block);
     }
 };
 
@@ -175,6 +175,6 @@ var circleTask2 = {
         } else {
             repeatneeded = false;            
         }    
-        saveSessionData2(pData.Block);
+        //saveSessionData2(pData.Block);
     }
 };

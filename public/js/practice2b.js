@@ -43,7 +43,7 @@ var repeat_pract2b_node = {
         if(repeatneeded){            
             return true;
         } else {
-            console.log(repeatneeded, detectACC, "Practice2b Good to go!");
+            //console.log(repeatneeded, pData.DetectACC, "Practice2b Good to go!");
             return false;
         }
     }
