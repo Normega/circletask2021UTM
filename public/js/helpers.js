@@ -126,6 +126,7 @@ var images = [
                 'assets/entrain_instruct.jpg',
                 'assets/CombinedLogo.png',
                 'assets/confrating.jpg',
+                'assets/arousalrating.jpg',
                 'assets/Feedback.jpg',
                 'assets/questionnaire.png'                
             ];

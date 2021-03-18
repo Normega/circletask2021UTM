@@ -33,6 +33,22 @@ var confidencerating={
     },
 };
 
+var arousalrating={
+    type: 'html-slider-response',
+    min: 0,
+    max: 50,
+    slider_start: 25,
+    require_movement: true,    
+    stimulus: "<p class='image'><img src='/assets/arousalrating.jpg' style='width:800px;height:160px;' /></p>",
+    labels: ['Low Arousal', 'High Arousal Confident'],
+    prompt: "<p><b>How confident are you in your response?</b><br>"+
+            "Move the slider with the arrow keys and press spacebar to continue</p>",
+    on_finish: function(data){
+        confRating= data.response;
+        saveSessionData(blockName + "_Confidence", curSpeed, rateChange, step, lastACC, detectACC, detectedChange, confRating);
+    },
+};
+
 var detectchange = {
     type: "html-keyboard-response",
         stimulus: "<p class='image'><img  style='width:500px; height:500px;' src='/assets/Feedback.jpg' /></p>",

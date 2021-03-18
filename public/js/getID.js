@@ -2,8 +2,6 @@
 const authnum = getAuthNum()
 var goodId = false;
 
-
-
 // Authentication
 firebase.auth().signInAnonymously()
   .then(() => {
@@ -21,7 +19,7 @@ firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
-    var uid = user.uid;
+    pData.AuthId = user.uid;
 
     //console.log("Just registered user ID: ",uid);
     // ...
@@ -52,7 +50,7 @@ on_finish: function(data){
     
     if(data.response.userId1 && data.response.userId1 == data.response.userId2){
         //console.log(data.response.userId1);
-        userId = data.response.userId1;
+        pData.UserId  = data.response.userId1;
         goodId = true;
     }        
 }
@@ -64,8 +62,8 @@ var validateID_node = {
     on_load: function() { trialNumber = 1; },
     loop_function: function(){                
         if(goodId){            
-            console.log("Good ID: ", userId); //make sure the number matches the timeline order (from 0)
-            saveSessionData("GetID");
+            console.log("Good ID: ", pData.UserId); //make sure the number matches the timeline order (from 0)
+            saveSessionData2("GetID");
             trialNumber = 0;
             return false; //exit loop
         } else {  

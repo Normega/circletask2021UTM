@@ -71,7 +71,6 @@ var consent_node = {
     loop_function: function(){                
         if(gotConsent){            
             console.log("Consent ID: ", consentID); //make sure the number matches the timeline order (from 0)
-            //saveSessionData("GotConsent");
             trialNumber = 0;
             return false; //exit loop
         } else {  

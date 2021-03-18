@@ -1,17 +1,20 @@
 // Circle Task
-// v.0.2
+// v.0.5
 // Authors: Kyle Logie and Norman Farb
 // Email: norman.farb@utoronto.ca
 
 // Experiment-wide Variables
 var maintimeline = []; // the main experiment timeline
 
-
-
 ////////////////////////////////////////////////////////
 // Populate the Experiment Timeline
 ////////////////////////////////////////////////////////
 (firebase.auth);
+
+var user = firebase.auth().currentUser;
+
+pData.AuthId = user.uid;
+console.log("Auth ID: ", pData.AuthId); //make sure the number matches the timeline order (from 0)
 
 maintimeline.push(preload); //helpers.js
 maintimeline.push(welcome_trial); //instructions.js
@@ -20,6 +23,8 @@ maintimeline.push(welcome_trial); //instructions.js
 maintimeline.push(QC_node); //instructions.js
 maintimeline.push(consent_node); //consent.js
 maintimeline.push(validateID_node); //getID.js
+
+
 
 maintimeline.push(entrain_node);    //entrain.js
 maintimeline.push(practice_node);   //practice1.js

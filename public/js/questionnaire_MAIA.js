@@ -4,55 +4,6 @@ The Multidimensional Assessment of Interoceptive Awareness, Version 2 (MAIA-2).
 PLoS ONE 13(12): e0208034.
 */
 
-var MAIA_01;
-var MAIA_02;
-var MAIA_03;
-var MAIA_04;
-var MAIA_05;
-var MAIA_06;
-var MAIA_07;
-var MAIA_08;
-var MAIA_09;
-var MAIA_10;
-var MAIA_11;
-var MAIA_12;
-var MAIA_13;
-var MAIA_14;
-var MAIA_15;
-var MAIA_16;
-var MAIA_17;
-var MAIA_18;
-var MAIA_19;
-var MAIA_20;
-var MAIA_21;
-var MAIA_22;
-var MAIA_23;
-var MAIA_24;
-var MAIA_25;
-var MAIA_26;
-var MAIA_27;
-var MAIA_28;
-var MAIA_29;
-var MAIA_30;
-var MAIA_31;
-var MAIA_32;
-var MAIA_33;
-var MAIA_34;
-var MAIA_35;
-var MAIA_36;
-var MAIA_37;
-
-var MAIA_noticing_score; 
-var MAIA_noticing_score; 
-var MAIA_notdistracting_score; 
-var MAIA_notworrying_score; 
-var MAIA_attentionregulation_score; 
-var MAIA_emoaware_score; 
-var MAIA_selfreg_score; 
-var MAIA_bodylisten_score; 
-var MAIA_trusting_score; 
-var MAIA_TOTAL_score; 
-
 var MAIA_items = [
     "0 - Never", 
     "1", 
@@ -76,11 +27,11 @@ var MAIA_noticing = {
     randomize_question_order: false,
     scale_width: scaleWidth,
     on_finish: function(data){
-        MAIA_01 = data.response.MAIA_01;
-        MAIA_02 = data.response.MAIA_02;
-        MAIA_03 = data.response.MAIA_03;
-        MAIA_04 = data.response.MAIA_04;
-        MAIA_noticing_score = (MAIA_01 + MAIA_02 + MAIA_03 + MAIA_04)/4;
+        pData.MAIA_01 = data.response.MAIA_01;
+        pData.MAIA_02 = data.response.MAIA_02;
+        pData.MAIA_03 = data.response.MAIA_03;
+        pData.MAIA_04 = data.response.MAIA_04;
+        pData.MAIA_noticing_score = (pData.MAIA_01 + pData.MAIA_02 + pData.MAIA_03 + pData.MAIA_04)/4;
     },    
  };
 
@@ -99,14 +50,14 @@ var MAIA_noticing = {
     randomize_question_order: false,
     scale_width: scaleWidth,
     on_finish: function(data){
-        MAIA_05 = data.response.MAIA_05;
-        MAIA_06 = data.response.MAIA_06;
-        MAIA_07 = data.response.MAIA_07;
-        MAIA_08 = data.response.MAIA_08;
-        MAIA_09 = data.response.MAIA_09;
-        MAIA_10 = data.response.MAIA_10;
-        MAIA_notdistracting_score = (6 - MAIA_05 + 6 - MAIA_06 + 6 - MAIA_07 + 
-                                    6 - MAIA_08 + 6 - MAIA_09 + 6 - MAIA_10)/6;
+        pData.MAIA_05 = data.response.MAIA_05;
+        pData.MAIA_06 = data.response.MAIA_06;
+        pData.MAIA_07 = data.response.MAIA_07;
+        pData.MAIA_08 = data.response.MAIA_08;
+        pData.MAIA_09 = data.response.MAIA_09;
+        pData.MAIA_10 = data.response.MAIA_10;
+        pData.MAIA_notdistracting_score = (6 - pData.MAIA_05 + 6 - pData.MAIA_06 + 6 - pData.MAIA_07 + 
+                                    6 - pData.MAIA_08 + 6 - pData.MAIA_09 + 6 - pData.MAIA_10)/6;
     },
  };
  
@@ -124,13 +75,13 @@ var MAIA_noticing = {
     randomize_question_order: false,
     scale_width: scaleWidth,
     on_finish: function(data){
-        MAIA_11 = data.response.MAIA_11;
-        MAIA_12 = data.response.MAIA_12;
-        MAIA_13 = data.response.MAIA_13;
-        MAIA_14 = data.response.MAIA_14;
-        MAIA_15 = data.response.MAIA_15;
-        MAIA_notworrying_score = (6 - MAIA_11 + 6 - MAIA_12 + 
-                                 MAIA_13 + MAIA_14 + 6 - MAIA_15)/5;
+        pData.MAIA_11 = data.response.MAIA_11;
+        pData.MAIA_12 = data.response.MAIA_12;
+        pData.MAIA_13 = data.response.MAIA_13;
+        pData.MAIA_14 = data.response.MAIA_14;
+        pData.MAIA_15 = data.response.MAIA_15;
+        pData.MAIA_notworrying_score = (6 - pData.MAIA_11 + 6 - pData.MAIA_12 + 
+            pData.MAIA_13 + pData.MAIA_14 + 6 - pData.MAIA_15)/5;
     },
  };
 
@@ -150,15 +101,15 @@ var MAIA_noticing = {
     randomize_question_order: false,
     scale_width: scaleWidth,
     on_finish: function(data){
-        MAIA_16 = data.response.MAIA_16;
-        MAIA_17 = data.response.MAIA_17;
-        MAIA_18 = data.response.MAIA_18;
-        MAIA_19 = data.response.MAIA_19;
-        MAIA_20 = data.response.MAIA_20;
-        MAIA_21 = data.response.MAIA_21;
-        MAIA_22 = data.response.MAIA_22;
-        MAIA_attentionregulation_score = (MAIA_16 + MAIA_17 + MAIA_18 + 
-                                        MAIA_19 + MAIA_20 + MAIA_21 + MAIA_22)/7;
+        pData.MAIA_16 = data.response.MAIA_16;
+        pData.MAIA_17 = data.response.MAIA_17;
+        pData.MAIA_18 = data.response.MAIA_18;
+        pData.MAIA_19 = data.response.MAIA_19;
+        pData.MAIA_20 = data.response.MAIA_20;
+        pData.MAIA_21 = data.response.MAIA_21;
+        pData.MAIA_22 = data.response.MAIA_22;
+        pData.MAIA_attentionregulation_score = (pData.MAIA_16 + pData.MAIA_17 + pData.MAIA_18 + 
+            pData.MAIA_19 + pData.MAIA_20 + pData.MAIA_21 + pData.MAIA_22)/7;
     },
  };
  
@@ -176,12 +127,12 @@ var MAIA_noticing = {
     randomize_question_order: false,
     scale_width: scaleWidth,
     on_finish: function(data){
-        MAIA_23 = data.response.MAIA_23;
-        MAIA_24 = data.response.MAIA_24;
-        MAIA_25 = data.response.MAIA_25;
-        MAIA_26 = data.response.MAIA_26;
-        MAIA_27 = data.response.MAIA_27;
-        MAIA_emoaware_score = (MAIA_23 + MAIA_24 + MAIA_25 + MAIA_26 + MAIA_27)/5;
+        pData.MAIA_23 = data.response.MAIA_23;
+        pData.MAIA_24 = data.response.MAIA_24;
+        pData.MAIA_25 = data.response.MAIA_25;
+        pData.MAIA_26 = data.response.MAIA_26;
+        pData.MAIA_27 = data.response.MAIA_27;
+        pData.MAIA_emoaware_score = (pData.MAIA_23 + pData.MAIA_24 + pData.MAIA_25 + pData.MAIA_26 + pData.MAIA_27)/5;
     },
  };
  
@@ -198,11 +149,11 @@ var MAIA_noticing = {
     randomize_question_order: false,
     scale_width: scaleWidth,
     on_finish: function(data){
-        MAIA_28 = data.response.MAIA_28;
-        MAIA_29 = data.response.MAIA_29;
-        MAIA_30 = data.response.MAIA_30;
-        MAIA_31 = data.response.MAIA_31;
-        MAIA_selfreg_score = (MAIA_28 + MAIA_29 + MAIA_30 + MAIA_31)/4;
+        pData.MAIA_28 = data.response.MAIA_28;
+        pData.MAIA_29 = data.response.MAIA_29;
+        pData.MAIA_30 = data.response.MAIA_30;
+        pData.MAIA_31 = data.response.MAIA_31;
+        pData.MAIA_selfreg_score = (pData.MAIA_28 + pData.MAIA_29 + pData.MAIA_30 + pData.MAIA_31)/4;
     },
  };
 
@@ -218,10 +169,10 @@ var MAIA_noticing = {
     randomize_question_order: false,
     scale_width: scaleWidth,
     on_finish: function(data){
-        MAIA_32 = data.response.MAIA_32;
-        MAIA_33 = data.response.MAIA_33;
-        MAIA_34 = data.response.MAIA_34;
-        MAIA_bodylisten_score = (MAIA_32 + MAIA_33 + MAIA_34)/3;
+        pData.MAIA_32 = data.response.MAIA_32;
+        pData.MAIA_33 = data.response.MAIA_33;
+        pData.MAIA_34 = data.response.MAIA_34;
+        pData.MAIA_bodylisten_score = (pData.MAIA_32 + pData.MAIA_33 + pData.MAIA_34)/3;
     },
  };
 
@@ -237,10 +188,10 @@ var MAIA_noticing = {
     randomize_question_order: false,
     scale_width: scaleWidth,
     on_finish: function(data){
-        MAIA_35 = data.response.MAIA_35;
-        MAIA_36 = data.response.MAIA_36;
-        MAIA_37 = data.response.MAIA_37;
-        MAIA_trusting_score = (MAIA_35 + MAIA_36 + MAIA_37)/3;
+        pData.MAIA_35 = data.response.MAIA_35;
+        pData.MAIA_36 = data.response.MAIA_36;
+        pData.MAIA_37 = data.response.MAIA_37;
+        pData.MAIA_trusting_score = (pData.MAIA_35 + pData.MAIA_36 + pData.MAIA_37)/3;
     },
  };
 
@@ -258,22 +209,15 @@ var MAIA_noticing = {
     timeline: [MAIA_instruct, MAIA_noticing, MAIA_notdistracting, MAIA_notworrying, MAIA_attentionregulation,
                 MAIA_emoaware, MAIA_selfreg, MAIA_bodylisten, MAIA_trusting],
     on_timeline_start: function(){resetLogVars();},
-    on_timeline_finish: function(){
-        console.log("Finished MAIA! Trusting score: ",MAIA_trusting_score);
-        MAIA_TOTAL_score = MAIA_01 + MAIA_02 + MAIA_03 + MAIA_04 + 6 - MAIA_05 + 6 - MAIA_06 + 
-                           6 - MAIA_07 + 6 - MAIA_08 + 6 - MAIA_09 + 6 - MAIA_10 + 6 - MAIA_11 + 
-                           6 - MAIA_12 + MAIA_13 + MAIA_14 + 6 - MAIA_15 + MAIA_16 + MAIA_17 + 
-                           MAIA_18 + MAIA_19 + MAIA_20 + MAIA_21 + MAIA_22 + MAIA_23 + MAIA_24 + 
-                           MAIA_25 + MAIA_26 + MAIA_27 + MAIA_28 + MAIA_29 + MAIA_30 + MAIA_31 + 
-                           MAIA_32 + MAIA_33 + MAIA_34 + MAIA_35 + MAIA_36 + MAIA_37;
-        saveSessionData("questionnaire_MAIA", curSpeed, rateChange, step, lastACC, detectACC, detectedChange, confRating,
-                        MAIA_01, MAIA_02, MAIA_03, MAIA_04, MAIA_05, MAIA_06, MAIA_07, MAIA_08, MAIA_09, 
-                        MAIA_10, MAIA_11, MAIA_12, MAIA_13, MAIA_14, MAIA_15, MAIA_16, MAIA_17, MAIA_18, 
-                        MAIA_19, MAIA_20, MAIA_21, MAIA_22, MAIA_23, MAIA_24, MAIA_25, MAIA_26, MAIA_27, 
-                        MAIA_28, MAIA_29, MAIA_30, MAIA_31, MAIA_32, MAIA_33, MAIA_34, MAIA_35, MAIA_36, MAIA_37,
-                        MAIA_noticing_score, MAIA_notdistracting_score, MAIA_notworrying_score, MAIA_attentionregulation_score,
-                        MAIA_emoaware_score, MAIA_selfreg_score, MAIA_bodylisten_score, MAIA_trusting_score,
-                        MAIA_TOTAL_score);
+    on_timeline_finish: function(){        
+        pData.MAIA_TOTAL_score = pData.MAIA_01 + pData.MAIA_02 + pData.MAIA_03 + pData.MAIA_04 + 
+            6 - pData.MAIA_05 + 6 - pData.MAIA_06 + 
+                           6 - pData.MAIA_07 + 6 - pData.MAIA_08 + 6 - pData.MAIA_09 + 6 - pData.MAIA_10 + 6 - pData.MAIA_11 + 
+                           6 - pData.MAIA_12 + pData.MAIA_13 + pData.MAIA_14 + 6 - pData.MAIA_15 + pData.MAIA_16 + pData.MAIA_17 + 
+                           pData.MAIA_18 + pData.MAIA_19 + pData.MAIA_20 + pData.MAIA_21 + pData.MAIA_22 + pData.MAIA_23 + pData.MAIA_24 + 
+                           pData.MAIA_25 + pData.MAIA_26 + pData.MAIA_27 + pData.MAIA_28 + pData.MAIA_29 + pData.MAIA_30 + pData.MAIA_31 + 
+                           pData.MAIA_32 + pData.MAIA_33 + pData.MAIA_34 + pData.MAIA_35 + pData.MAIA_36 + pData.MAIA_37;
+        saveSessionData2("questionnaire_MAIA");
         
     },
 
