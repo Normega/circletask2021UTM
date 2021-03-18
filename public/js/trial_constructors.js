@@ -3,10 +3,9 @@ var entrain_reminder = {
     stimulus: "<p>Were you able to match your breath to the circle?</p>",
     choices: ["y", "n"],
     prompt: "<p>Y - Yes. <br/>  N - No. </p>",
-    data: { 
-        taskType: "entrainCheck", 
-        trial: trialNumber 
-    },    
+    on_finish: function(data){        
+        pData.EntrainOK = jsPsych.pluginAPI.compareKeys(data.response, 'y');     
+    }
 }
 
 var fixation = {
@@ -28,8 +27,8 @@ var confidencerating={
     prompt: "<p><b>How confident are you in your response?</b><br>"+
             "Move the slider with the arrow keys and press spacebar to continue</p>",
     on_finish: function(data){
-        confRating= data.response;
-        saveSessionData(blockName + "_Confidence", curSpeed, rateChange, step, lastACC, detectACC, detectedChange, confRating);
+        pData.Confidence = data.response;
+        //saveSessionData2(pData.Block + "_Confidence");        
     },
 };
 
@@ -40,12 +39,12 @@ var arousalrating={
     slider_start: 25,
     require_movement: true,    
     stimulus: "<p class='image'><img src='/assets/arousalrating.jpg' style='width:800px;height:160px;' /></p>",
-    labels: ['Low Arousal', 'High Arousal Confident'],
-    prompt: "<p><b>How confident are you in your response?</b><br>"+
+    labels: ['Low Arousal', 'High Arousal'],
+    prompt: "<p><b>How much arousal do you feel in your body right now?</b><br>"+
             "Move the slider with the arrow keys and press spacebar to continue</p>",
     on_finish: function(data){
-        confRating= data.response;
-        saveSessionData(blockName + "_Confidence", curSpeed, rateChange, step, lastACC, detectACC, detectedChange, confRating);
+        pData.Arousal = data.response;
+        //saveSessionData2(pData.Block + "_Arousal");        
     },
 };
 
@@ -56,32 +55,27 @@ var detectchange = {
         prompt: "",
         data: { 
             Block: "Change Detect", 
-            trialNumber: trialNumber
+            trialNumber: pData.TrialNum
         },
         post_trial_gap: 500,
         on_finish: function (data) {
-            correctKey = getCorrect(curSpeed);
-            detectACC = jsPsych.pluginAPI.compareKeys(data.response, correctKey);
-            //console.log("Speed: ",curSpeed," Correct Key: ",correctKey, " Key Pressed: ", data.response, " ACC:", +
-            //    detectACC, "Tracking ACC: ", lastACC);            
-            if (!detectACC & blockName == "Practice2"){
+            correctKey = getCorrect(pData.ChangeType);
+            pData.DetectACC = jsPsych.pluginAPI.compareKeys(data.response, correctKey);
+            
+            if (!pData.DetectACC & pData.Block == "Practice2"){
                 repeatneeded=true;
-            }
-            data.correct = detectACC;            
-            saveSessionData(blockName + "_Detect", curSpeed, rateChange, step, lastACC, detectACC, detectedChange);
+            }               
+            
+            //saveSessionData2(data.Block + "_Detect");
         },        
 };
 
 //Breath Entraining Trial Construction
 var breathEntrain = {
     type: "breath-entraining",
-    trialNumber: function () {
-        trialNumber +=1;
-        // function needed to return dynamic value of trialNumber
-        //console.log("BlockName: ",blockName," TrialNum: ",trialNumber," Speed: ",curSpeed," trial.");
-        //console.log("lastACC ",lastACC," detectACC ",detectACC," repeatneeded ",repeatneeded);
-        
-        return trialNumber;
+    trialNumber: function () {         // function needed to return dynamic value of trialNumber
+        pData.TrialNum++;
+        return pData.TrialNum;
     },    
     stimulus:
         "<canvas id='myCanvas' width='800' height='500'></canvas>" +
@@ -89,21 +83,17 @@ var breathEntrain = {
     post_trial_gap: 1000,
     response_ends_trial: false,
     numberOfPulses: NUMBER_OF_ENTRAIN_PULSES,
-    on_load: function(){saveSessionData("Entrain_Begin");},
-    on_finish: function(){saveSessionData("Entrain_Complete");}
+    on_load: function(){saveSessionData2("Entrain_Begin");},
+    on_finish: function(){saveSessionData2("Entrain_Complete");}
 };
 
 
 //Circle Task 1 Trial Construction
 var circleTask1 = {
     type: "circle-task1",
-    trialNumber: function () {
-        trialNumber +=1;
-        // function needed to return dynamic value of trialNumber
-        //console.log("BlockName: ",blockName," TrialNum: ",trialNumber," Speed: ",curSpeed," trial.");
-        //console.log("lastACC ",lastACC," detectACC ",detectACC," repeatneeded ",repeatneeded);
-        
-        return trialNumber;
+    trialNumber: function () { // function needed to return dynamic value of trialNumber
+        pData.TrialNum++;
+        return pData.TrialNum;
     },
     stimulus:
         "<canvas id='myCanvas' width='800' height='500'></canvas>" +
@@ -111,30 +101,30 @@ var circleTask1 = {
         choices: ['ArrowUp', 'ArrowDown'], //up or down 38 40
     post_trial_gap: 500,
     response_ends_trial: false,
-    step: function () {
+    step: function () {        
         // function needed to return dynamic value of step (allows it to change from initial value)   
-        return step;
+        return pData.StepSize;
     },
-    totalRateChange: function () {
+    totalRateChange: function() {
         // to update rate change
-        return rateChange;            
+        return pData.TotalRateChange;            
     },
-    numberOfPulses: function() { return numPulses;},
-    speed: function(){        
-        return curSpeed;
+    numberOfPulses: function() { return pData.NumPulses;},
+    speed: function(){                
+        return pData.ChangeType;
     },
     on_load: function(){   
-        lastACC = 0;     
-        saveSessionData(blockName + "_Begin");
+        resetLogVars();
+        //saveSessionData2(pData.Block + "_Begin");
     },
     on_finish: function(data){
-        lastACC = data.accuracy;
-        if(lastACC < CRIT_TRACK_ACC){
+        pData.TrackACC = data.accuracy;
+        if(pData.TrackACC < CRIT_TRACK_ACC){
             repeatneeded = true;         
         } else {
             repeatneeded = false;            
         }
-        saveSessionData(blockName + "_Complete", data.speed, data.totalRateChange, data.step, lastACC);
+        saveSessionData2(pData.Block);
     }
 };
 
@@ -142,47 +132,49 @@ var circleTask1 = {
 //Circle Task 2 Trial Construction
 var circleTask2 = {
     type: "circle-task2",
-    trialNumber: function () {
-        trialNumber +=1;
-        // function needed to return dynamic value of trialNumber
-        //console.log("BlockName: ",blockName," TrialNum: ",trialNumber," Speed: ",curSpeed," trial.");
-        //console.log("lastACC ",lastACC," detectACC ",detectACC," repeatneeded ",repeatneeded);
-        
-        return trialNumber;
+    trialNumber: function () { // function needed to return dynamic value of trialNumber        
+        pData.TrialNum++;        
+        return pData.TrialNum;
     },
     stimulus:
         "<canvas id='myCanvas' width='800' height='500'></canvas>" +
         "<p id='prompt' style='text-align:center;font-weight:bold;'></p>",
-        choices: ['ArrowUp', 'ArrowDown', ' '], 
+        choices: ['ArrowUp', 'ArrowDown', 'ArrowRight'], 
     post_trial_gap: 500,
     response_ends_trial: false,
     step: function () {
         // function needed to return dynamic value of step (allows it to change from initial value)   
-        return step;
+        return pData.StepSize;
     },
     totalRateChange: function () {
         // to update rate change
-        return rateChange;            
+        return pData.TotalRateChange;            
     },
-    numberOfPulses: function() { return numPulses;},
+    numberOfPulses: function() { return pData.NumPulses;},
     speed: function(){        
-        return curSpeed;
+        return pData.ChangeType;
     },
-    detectedChange: function(){
-        return detectedChange;
+    detectedChange: function(data){
+        pData.DetectedChange = data.detectedChange;
+        return pData.DetectedChange;
+    },
+    detectedEarly: function(data){
+        pData.DetectedEarly = data.detectedEarly;
+        return pData.DetectedEarly;
     },
     on_load: function(){   
-        lastACC = 0;     
-        saveSessionData(blockName + "_Begin");
+        resetLogVars();    
+        //saveSessionData2(pData.Block + "_Begin");
     },
     on_finish: function(data){
-        lastACC = data.accuracy;
-        if(lastACC < CRIT_TRACK_ACC){
+        pData.TrackACC = data.accuracy;
+        pData.DetectedChange = data.detectedChange;
+        pData.DetectedEarly = data.detectedEarly;
+        if(pData.TrackACC < CRIT_TRACK_ACC){
             repeatneeded = true;         
         } else {
             repeatneeded = false;            
-        }
-        saveSessionData(blockName + "_Complete", data.speed, data.totalRateChange, data.step, 
-                        lastACC, "", detectedChange);
+        }    
+        saveSessionData2(pData.Block);
     }
 };

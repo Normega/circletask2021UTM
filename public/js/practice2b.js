@@ -27,10 +27,10 @@ var pract2b_instruct = {
 // instructions if the person fails the task 1 practice trials
 var repeat_pract2b_instruct = {
     type: "instructions",
-    repeatneeded: function(){return repeatneeded},
-    detectACC: function(){return detectACC},    
+    //repeatneeded: function(){return repeatneeded},
+    //detectACC: function(){return pData.detectACC},    
     pages: [
-        function(){return errortext(lastACC, detectACC)},        
+        function(){return errortext()},        
     ],
     show_clickable_nav: true,
     post_trial_gap: 500
@@ -53,17 +53,17 @@ var practice2b_node = {
     timeline: [pract2b_instruct, circleTask2, detectchange, entrain_reminder, repeat_pract2b_node],
     on_timeline_start: function() {
         console.log("Prep Practice 2b");
-        blockName = "Practice2b";        
+        pData.Block = "Practice2b";        
         resetLogVars();
-        curSpeed = generatetrials(1)[0]; //select 1 at random each time the node loads                      
-        numPulses = NUMBER_OF_PRACTICE_PULSES_2;
+        pData.ChangeType = generatetrials(1)[0]; //select 1 at random each time the node loads                      
+        pData.NumPulses = NUMBER_OF_PRACTICE_PULSES_2;
     },   
     loop_function: function(data){
-        console.log("Track ACC: ",lastACC);
+        console.log("Track ACC: ",pData.TrackACC);
         if(repeatneeded){            
             return true; //keep looping when accuracy is too low
         } else {
-            trialNumber = 0;            
+            pData.TrialNum = 0;            
             return false; //break out of loop when accuracy is high enough
         }        
     }

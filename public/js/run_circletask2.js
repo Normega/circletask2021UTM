@@ -50,7 +50,7 @@ var repeat_circle2_node = {
         if(repeatneeded){            
             return true;
         } else {
-            console.log(repeatneeded, detectACC, "Circle 2 Good to go!");
+            //console.log(repeatneeded, detectACC, "Circle 2 Good to go!");
             return false;
         }
     }
@@ -60,22 +60,24 @@ let circle2Trials = generatetrials(NUMBER_OF_TRIALS_2)
 shuffle(circle2Trials);
 
 var circle2_node = {
-    timeline: [fixation, circleTask2, detectchange, confidencerating, entrain_reminder, repeat_circle2_node],
+    timeline: [fixation, circleTask2, detectchange, confidencerating, arousalrating, entrain_reminder, repeat_circle2_node],
     on_timeline_start: function() {
-        console.log("Prep Circle 2");
-        blockName = "Circle2"; 
-        numPulses = NUMBER_OF_PULSES_2;       
+        //console.log("Prep Circle 2");
+        pData.Block = "Circle2"; 
+        pData.NumPulses = NUMBER_OF_PULSES_2;               
+        staircase_init();
         resetLogVars();
-        curSpeed = circle2Trials.pop(); //select 1 from the trial list        
+        pData.ChangeType = circle2Trials.pop(); //select 1 from the trial list        
     },   
-    loop_function: function(data){
-        console.log("Track ACC: ",lastACC);
+    loop_function: function(){
+        //console.log("Track ACC: ",pData.TrackACC);
+        saveSessionData2(pData.Block);
         if(circle2Trials.length > 0){ 
             //console.log("Do staircase for acc: ", detectACC);
-            //nextStep(detectACC); No staircase for Version B            
+            //nextStep(pData.DetectACC); No staircase for Version B            
             return true; //keep looping when there are more trials to use
         } else {
-            trialNumber = 0;            
+            pData.TrialNum = 0;            
             return false; //break out of loop when trials are used up
         }        
     }

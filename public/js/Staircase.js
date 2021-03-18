@@ -1,59 +1,53 @@
-let goodcount = 0;
-let badcount = 0;
-let reversalCount = 0;
-let rateChange = STARTING_RATE_CHANGE; //starting proportional rate change across a change trial; .5 = 50% change from the base rate
-let step = STARTING_STEP_SIZE; // starting step size for increasing or decreasing rate change (.1 = 10% added or subtracted from current rate)
-let hardbumper = false;
-let easybumper = false;
-let rateData = [rateChange];
-
+let rateData = [pData.TotalRateChange];
 
 function staircase_init(){
-    step = .1;
-    goodcount = 0;
-    hardbumper = false;
-    easybumper = false;
+    pData.StepSize = .1;
+    pData.goodcount = 0;
+    pData.hardbumper = false;
+    pData.easybumper = false;
+    pData.reversalCount = 0;
+    pData.TotalRateChange = STARTING_RATE_CHANGE;
+    pData.StepSize = STARTING_STEP_SIZE;
 }
 
 function nextStep(correct){
     
     if(correct){
-        goodcount ++;
+        pData.goodcount ++;
     } else {
-        badcount ++;
+        pData.badcount ++;
     }
 
-    if (goodcount == STAIR_DOWN_COUNT){
-        goodcount = 0; //reset the count
-        hardbumper = true;
-        rateChange -= step        
-        if (rateChange < .01){
-            rateChange =.01;
+    if (pData.goodcount == STAIR_DOWN_COUNT){
+        pData.goodcount = 0; //reset the count
+        pData.hardbumper = true;
+        pData.TotalRateChange -= pData.StepSize        
+        if (pData.TotalRateChange < .01){
+            pData.TotalRateChange =.01;
         }
     }
 
-    if (badcount == STAIR_UP_COUNT){
-        badcount = 0; //reset the count
-        easybumper = true;
-        rateChange += step
-        if (rateChange > 1){
-            rateChange =1;
+    if (pData.badcount == STAIR_UP_COUNT){
+        pData.badcount = 0; //reset the count
+        pData.easybumper = true;
+        pData.TotalRateChange += pData.StepSize
+        if (pData.TotalRateChange > 1){
+            pData.TotalRateChange =1;
         }
     }
 
     //check if a full reversal has been made - only update step if # of reversals is hit
-    if (hardbumper & easybumper) { 
-        reversalCount ++;
-        hardbumper = false;
-        easybumper = false;
-        if (reversalCount == STAIR_REVERSALS) {
-            reversalCount = 0;
-            step = step * STAIR_FACTOR;          
+    if (pData.hardbumper & pData.easybumper) { 
+        pData.reversalCount ++;
+        pData.hardbumper = false;
+        pData.easybumper = false;
+        if (pData.reversalCount == STAIR_REVERSALS) {
+            pData.reversalCount = 0;
+            pData.StepSize = pData.StepSize * STAIR_FACTOR;          
         }         
     }
 
-    rateData.push(rateChange);
-    console.log("Step: ",step,", Rate: ",rateChange,", Good: ",goodcount,", Bad: ",badcount,", Bumpers: ",hardbumper,easybumper);
+    rateData.push(pData.TotalRateChange);
 
 }
 

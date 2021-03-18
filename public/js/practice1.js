@@ -54,18 +54,16 @@ var repeat_pract_node = {
 var practice_node = {
     timeline: [pract_instruct, fixation, circleTask1, entrain_reminder, repeat_pract_node],
     on_timeline_start: function() {         
-        blockName = "Practice1"; 
-        repeatneeded=false; //start off as though things are great and wait to be disappointed
-        lastACC = 100; //start off as though things are great and wait to be disappointed
-        detectACC=1;  //start off as though things are great and wait to be disappointed
-        curSpeed = "nochange";
+        pData.Block = "Practice1"; 
+        repeatneeded=false; //start off as though things are great and wait to be disappointed        
+        pData.ChangeType = "nochange";
     },
     loop_function: function(data){
-        console.log("Track ACC: ",lastACC);
+        console.log("Track ACC: ",pData.TrackACC);
         if(repeatneeded){            
             return true; //keep looping when accuracy is too low
         } else {
-            trialNumber = 0;            
+            pData.TrialNum = 0;            
             return false; //break out of loop when accuracy is high enough
         }
     }

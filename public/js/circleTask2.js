@@ -15,7 +15,7 @@ jsPsych.plugins["circle-task2"] = (function () {
                 type: jsPsych.plugins.parameterType.KEYCODE,
                 array: true,
                 pretty_name: "Choices",
-                default: ['arrowup','arrowdown',' '], // up and down and spacebar
+                default: ['arrowup','arrowdown','arrowright'],
                 description: "The keys the subject is allowed to press to respond to the stimulus.",
             },
             prompt: {
@@ -40,7 +40,7 @@ jsPsych.plugins["circle-task2"] = (function () {
             totalRateChange: {
                 type: jsPsych.plugins.parameterType.INT,
                 pretty_name: "Total rate change.",
-                default: rateChange,
+                default: .5,
                 description: "Determines the change rate of the trial.",
             },
             numberOfPulses: {
@@ -132,7 +132,8 @@ jsPsych.plugins["circle-task2"] = (function () {
                 speed: trial.speed,
                 step: trial.step,
                 accuracy: computeACC(runningDeviation, totalFrames),
-                detectedChange: cumulativeChange
+                detectedChange: cumulativeChange,
+                detectedEarly: pdetect,
                 //responses: responses,
                 // stimulus: trial.stimulus,
             };
@@ -153,7 +154,7 @@ jsPsych.plugins["circle-task2"] = (function () {
             //} else if (info.key == 40){
             } else if (jsPsych.pluginAPI.compareKeys('ArrowDown', info.key)){
                 current_response = "contract";
-            } else if (jsPsych.pluginAPI.compareKeys(' ', info.key)){
+            } else if (jsPsych.pluginAPI.compareKeys('ArrowRight', info.key)){
                 current_response = "changedetected";                                
             };            
         };
@@ -188,6 +189,7 @@ jsPsych.plugins["circle-task2"] = (function () {
         }
         const changeRate = change ** (1 / (trial.numberOfPulses - 1));        
         var cumulativeChange = changeRate;
+        var pdetect = false; //to log if they exited early
 
         // setting up variables
         const firstpulsetime = FIRST_PULSE_TIME; //first pulse time in ms
@@ -247,7 +249,7 @@ jsPsych.plugins["circle-task2"] = (function () {
                 radius += dr;
                 prompt.innerHTML = `BREATHE IN  + PRESS UP ARROW `+
                 `<br> ACCURACY: ${computeACC(runningDeviation, totalFrames)}`+
-                `<br><br>PRESS SPACEBAR IF YOU NOTICE A CHANGE IN SPEED`;
+                `<br><br>PRESS RIGHT ARROW IF YOU NOTICE A CHANGE IN SPEED`;
                 if (current_response != "expand"){
                     runningDeviation += 1;
                 }
@@ -255,7 +257,7 @@ jsPsych.plugins["circle-task2"] = (function () {
                 radius -= dr;
                 prompt.innerHTML = `BREATHE OUT  + PRESS DOWN ARROW  `+
                                     `<br> ACCURACY: ${computeACC(runningDeviation, totalFrames)}`+
-                                    `<br><br>PRESS SPACEBAR IF YOU NOTICE A CHANGE IN SPEED`;
+                                    `<br><br>PRESS RIGHT ARROW IF YOU NOTICE A CHANGE IN SPEED`;
                 if (current_response != "contract"){
                     runningDeviation += 1;
                 }
@@ -270,6 +272,7 @@ jsPsych.plugins["circle-task2"] = (function () {
             if (current_response == "changedetected"){
                 //console.log("Detect Registered!");                
                 detectedChange = cumulativeChange;
+                pdetect = true;
                 doneTrial = true;
                 end_trial(animationId);
             } else if (expand && elapsed >= onewayTime) {                

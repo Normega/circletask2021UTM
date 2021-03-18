@@ -40,7 +40,7 @@ jsPsych.plugins["circle-task1"] = (function () {
             totalRateChange: {
                 type: jsPsych.plugins.parameterType.INT,
                 pretty_name: "Total rate change.",
-                default: rateChange,
+                default: .5,
                 description: "Determines the change rate of the trial.",
             },
             numberOfPulses: {

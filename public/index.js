@@ -3,6 +3,8 @@
 // Authors: Kyle Logie and Norman Farb
 // Email: norman.farb@utoronto.ca
 
+
+
 // Experiment-wide Variables
 var maintimeline = []; // the main experiment timeline
 
@@ -11,10 +13,6 @@ var maintimeline = []; // the main experiment timeline
 ////////////////////////////////////////////////////////
 (firebase.auth);
 
-var user = firebase.auth().currentUser;
-
-pData.AuthId = user.uid;
-console.log("Auth ID: ", pData.AuthId); //make sure the number matches the timeline order (from 0)
 
 maintimeline.push(preload); //helpers.js
 maintimeline.push(welcome_trial); //instructions.js

@@ -20,14 +20,16 @@ firebase.auth().onAuthStateChanged((user) => {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
     pData.AuthId = user.uid;
+    console.log("Just registered user ID: ",pData.AuthId);
 
-    //console.log("Just registered user ID: ",uid);
     // ...
   } else {
     // User is signed out
     // ...
   }
 });
+
+
 
 var idText = '<table>' +
     '<tr>'+
@@ -59,15 +61,15 @@ on_finish: function(data){
 // Logs that a user ID has been created
 var validateID_node = {
     timeline: [userId_trial],
-    on_load: function() { trialNumber = 1; },
+    on_load: function() { pData.TrialNum = 1; },
     loop_function: function(){                
         if(goodId){            
             console.log("Good ID: ", pData.UserId); //make sure the number matches the timeline order (from 0)
             saveSessionData2("GetID");
-            trialNumber = 0;
+            pData.TrialNum = 0;
             return false; //exit loop
         } else {  
-            trialNumber +=1;          
+            pData.TrialNum++;          
             idText = '<p>Sorry, those IDs are invalid or do not match. Please try again: ' +
             '<input name="userId1" id="userId1" type="text" /> </p>' +
             '<p> Please enter your ID a second time to make sure we get it right: ' +

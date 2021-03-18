@@ -1,7 +1,4 @@
 //Get User ID and Validate
-var consentID
-var gotConsent = false;
-
 var consenttext = '<div>'+
 '<p class="image"><img style="width:502px; height:130px;" src="/assets/CombinedLogo.png" /></p>' +
 '</div>'+
@@ -56,10 +53,11 @@ data: { taskType: "consentID"},
 on_finish: function(data){       
     //console.log(data.response);
     
-    if(data.response.consentID){        
-        console.log(consentID);
-        consentID = data.response.consentID;
-        gotConsent = true;
+    if(data.response.consentID){                
+        pData.ConsentId  = data.response.consentID;
+        pData.ConsentStatus  = true;
+        //console.log(pData.ConsentId);
+        
     }        
 }
 };
@@ -67,14 +65,14 @@ on_finish: function(data){
 // Logs that a consent ID has been created
 var consent_node = {
     timeline: [getConsent_trial],
-    on_load: function() { trialNumber = 1; },
+    on_load: function() { pData.TrialNum = 1; },
     loop_function: function(){                
-        if(gotConsent){            
-            console.log("Consent ID: ", consentID); //make sure the number matches the timeline order (from 0)
-            trialNumber = 0;
+        if(pData.ConsentStatus){            
+            //console.log("Consent ID: ", consentID); //make sure the number matches the timeline order (from 0)
+            pData.TrialNum = 0;
             return false; //exit loop
         } else {  
-            trialNumber +=1;          
+            pData.TrialNum +=1;          
             consentIdText = consenttext + 
             '<p style="text-align:center; color:red; font-size:14px;"><b>Sorry, but you must consent to participate in the ' +
             'study. Otherwise, please just close the browser window to exit.</b></p>'

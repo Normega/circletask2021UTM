@@ -52,20 +52,9 @@ var entrain_check = {
     stimulus: "<p>Were you able to match your breath to the circle?</p>",
     choices: ["y", "n"],
     prompt: "<p>Y - Yes. <br/>  N - No. </p>",
-    data: { 
-        taskType: "entrainCheck", 
-        trial: trialNumber 
-    },
-    on_finish: function(data){
-        detectACC = jsPsych.pluginAPI.compareKeys(data.response, 'y');
-        console.log(data.response);
-        if(detectACC){ 
-            data.entrainOK = true;
-            repeatneeded = false;
-        } else {
-            data.entrainOK = false;
-            repeatneeded = true;
-        }
+    on_finish: function(data){        
+        pData.EntrainOK = jsPsych.pluginAPI.compareKeys(data.response, 'y');
+        //console.log(data.response);
     }
 }
 
@@ -73,16 +62,15 @@ var entrain_check = {
 var entrain_node = {
     timeline: [repeat_entrain_node, entrain_instruct, breathEntrain, entrain_check],
     on_load: function() {         
-        blockName = "Entrain"; 
-        repeatneeded = false; 
-        detectACC=1;},
+        pData.Block = "Entrain"; 
+        resetLogVars();},
     loop_function: function(data){      
-        if(repeatneeded){
-            console.log("ENTRAIN REPEAT!"); //make sure the number matches the timeline order (from 0)
+        if(!pData.EntrainOK){
+            //console.log("ENTRAIN REPEAT!"); //make sure the number matches the timeline order (from 0)
             return true; //keep looping when more entraining is needed
         } else {
-            console.log("ENTRAIN OK!");
-            trialNumber = 0;
+            //console.log("ENTRAIN OK!");
+            pData.TrialNum = 0;
             return false; //break out of loop when entraining is complete
         }
     }

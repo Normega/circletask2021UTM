@@ -20,6 +20,7 @@ var QC_block = {
       {prompt: "Please select which of the following is true:", name: 'Check3', options: page_3_options, required: true},
       {prompt: "Please select which of the following is true:", name: 'Check4', options: page_4_options, required: true}
     ],
+    randomize_question_order: true,
     on_finish: function(data){
         console.log(data.response);
         if(data.response.Check1 == "Joyful" &
@@ -32,6 +33,7 @@ var QC_block = {
             greenlight = false;
             alert("I'm sorry, you did not answer all of the quality control questions correctly."+
             " We cannot proceed with the study.");
+            firebase.auth().signOut();
             jsPsych.endExperiment();
         }
     }

@@ -1,10 +1,4 @@
 // Helper Functions
-function now(){
-    var now = new Date().getTime() - EXPERIMENT_START_TIME;
-    return now
-}
-
-
 // Fisher-Yates (aka Knuth) Shuffle
 function shuffle(array) {
     var currentIndex = array.length,
@@ -83,29 +77,29 @@ function getCorrect(trialType){
 }
 
 //get correct response
-function errortext(lastACC, detectACC){
-    var badtrack = lastACC < CRIT_TRACK_ACC;
-    if (badtrack & detectACC){
+function errortext(){
+    var badtrack = pData.TrackACC < CRIT_TRACK_ACC;
+    if (badtrack & pData.DetectACC){
         feedbackHTML ="<p><b>Repeat Practice</b></p>" +            
         "<p class='description'><em_blue>Good news- you detected the change correctly!</em_blue></p>" +
         "<p class='description'><em_red>But, you did not track the circle accurately enough.</em_red></p>" +
         "<p>You will need to repeat the practice trial to make sure that you " +
         "understand the task instructions.</p>";
-        console.log(badtrack, detectACC, "Practice2 Repeat needed- bad track but Good guess...");    
-    } else if (badtrack & !detectACC){
+        console.log(badtrack, pData.DetectACC, "Practice2 Repeat needed- bad track but Good guess...");    
+    } else if (badtrack & !pData.DetectACC){
         feedbackHTML ="<p><b>Repeat Practice</b></p>" +
         "<p class='description'><em_red>Sorry, but you did not detect the change correctly.</em_red></p>" +
         "<p class='description'><em_red>You also did not track the circle accurately enough.</em_red></p>" +
         "<p>You will need to repeat the practice trial to make sure that you " +
         "understand the task instructions.</p>";
-        console.log(badtrack, detectACC, "Practice2 Repeat needed- pitcj bad track and bad guess...");
-    } else if (!detectACC){
+        console.log(badtrack, pData.DetectACC, "Practice2 Repeat needed- pitcj bad track and bad guess...");
+    } else if (!pData.DetectACC){
         feedbackHTML ="<p><b>Repeat Practice</b></p>" +
         "<p class='description'><em_blue>Good news- you tracked the circle accurately!</em_blue></p>" +
         "<p class='description'><em_red>But, you did not detect the change correctly.</em_red></p>" +
         "<p>You will need to repeat the practice trial to make sure that you " +
         "understand the task instructions.</p>";
-        console.log(badtrack, detectACC, "Practice2 Repeat needed- Good track and bad guess...");
+        console.log(badtrack, pData.DetectACC, "Practice2 Repeat needed- Good track and bad guess...");
     } else {
         feedbackHTML = "this should not have happened..."
         console.log("this should not have been triggered!")
@@ -113,11 +107,15 @@ function errortext(lastACC, detectACC){
     return feedbackHTML
 }
 
-function resetLogVars(){
-    lastACC = 100;          //start off as though things are great and wait to be disappointed
-    detectACC = 1;          //start off as though things are great and wait to be disappointed
-    detectedChange = false; //only relevant for Task version B, but let's make sure it is reset
-    confRating = "";        //wait for new ratings
+function resetLogVars(){            //only for things within trial, don't reset staircases here!
+    pData.TrackACC = "";          //start off as though things are great and wait to be disappointed
+    pData.DetectACC = "";          //start off as though things are great and wait to be disappointed
+    pData.DetectedChange = false;
+    pData.DetectedEarly = false;
+    pData.EntrainOK = false;
+    pData.Arousal = "";
+    pData.Confidence = "";
+    
 }
 
 var images = [

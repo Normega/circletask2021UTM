@@ -1,22 +1,48 @@
 // Database Functions
 // saves the data to firebase
 
+function now(){
+    var now = new Date().getTime() - EXPERIMENT_START_TIME;
+    return now
+}
+
+
 var pData = {
     StartTime: EXPERIMENT_START_TIME,
     Time: now(),        
-    UserId: "",
-    AuthId: "",
     EventNum: 1,
     Block: "",
-    TrialNum: "",
-    ChangeType: "",
-    TotalRateChange: "",
-    StepSize: "",
+    TrialNum: 0,        
+
+    //ID
+    UserId: "",
+    AuthId: "",
+    ConsentId: "",
+    ConsentStatus: false,
+    
+    //Participant Performance
     TrackACC: "",
     DetectACC: "",
+            
+    //Participant Responses
+    DetectedEarly: "", //did the participant finish the trial early (for task version B)
     DetectedChange: "",
+    EntrainOK: "",
     Confidence: "",
     Arousal: "",
+
+    //Staircase Control Variables
+    NumPulses: NUMBER_OF_PRACTICE_PULSES_1, //allows us to manipulate the numPulses based on prac vs. main trials
+    TotalRateChange: STARTING_RATE_CHANGE,
+    StepSize: STARTING_STEP_SIZE,
+    ChangeType: "",
+    goodcount: 0,
+    badcount: 0,
+    reversalCount: 0,
+    hardbumper: false,
+    easybumper: false,
+
+    //MAIA QUESTIONNAIRE
     MAIA_01: "",
     MAIA_02: "",
     MAIA_03: "",
@@ -67,8 +93,8 @@ var pData = {
 
 function saveSessionData2(blockName = ""){
     pData.Block = blockName;    
-    firebase.database().ref('sessions/' + pData.AuthId + '/' + eventNum).set(pData);
-    pData.EventNum +=1;
+    firebase.database().ref('sessions/' + pData.AuthId + '/' + pData.EventNum).set(pData);
+    pData.EventNum = pData.EventNum + 1;
 }
 
 

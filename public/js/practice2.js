@@ -22,10 +22,10 @@ var pract2_instruct = {
 // instructions if the person fails the task 1 practice trials
 var repeat_pract2_instruct = {
     type: "instructions",
-    repeatneeded: function(){return repeatneeded},
-    detectACC: function(){return detectACC},    
+    //repeatneeded: function(){return repeatneeded},
+    //detectACC: function(){return pData.DetectACC},    
     pages: [
-        function(){return errortext(lastACC, detectACC)},        
+        function(){return errortext()},        
     ],
     show_clickable_nav: true,
     // key_forward: 's',
@@ -39,7 +39,7 @@ var repeat_pract2_node = {
         if(repeatneeded){            
             return true;
         } else {
-            console.log(repeatneeded, detectACC, "Practice2 Good to go!");
+            console.log(repeatneeded, pData.DetectACC, "Practice2 Good to go!");
             return false;
         }
     }
@@ -49,18 +49,18 @@ var practice2_node = {
     timeline: [pract2_instruct, fixation, circleTask1, detectchange, entrain_reminder, repeat_pract2_node],
     on_timeline_start: function() {
         console.log("Prep Practice 2");
-        blockName = "Practice2";        
-        lastACC = 100;      //start off as though things are great and wait to be disappointed
+        pData.Block = "Practice2";        
+        
         detectACC = 1;      //start off as though things are great and wait to be disappointed
-        curSpeed = generatetrials(1)[0]; //select 1 at random each time the node loads                      
-        numPulses = NUMBER_OF_PRACTICE_PULSES_1;
+        pData.ChangeType = generatetrials(1)[0]; //select 1 at random each time the node loads                      
+        pData.NumPulses = NUMBER_OF_PRACTICE_PULSES_1;
     },   
     loop_function: function(data){
-        console.log("Track ACC: ",lastACC);
+        //console.log("Track ACC: ", pData.TrackACC);
         if(repeatneeded){            
             return true; //keep looping when accuracy is too low
         } else {
-            trialNumber = 0;            
+            pData.TrialNum = 0;            
             return false; //break out of loop when accuracy is high enough
         }        
     }
