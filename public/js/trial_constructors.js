@@ -26,6 +26,7 @@ var confidencerating={
     labels: ['Not Confident', 'Very Confident'],
     prompt: "<p><b>How confident are you in your response?</b><br>"+
             "Move the slider with the arrow keys and press spacebar to continue</p>",
+    post_trial_gap: 500,
     on_finish: function(data){
         pData.Confidence = data.response;
         //saveSessionData2(pData.Block + "_Confidence");        
@@ -42,6 +43,7 @@ var arousalrating={
     labels: ['Low Arousal', 'High Arousal'],
     prompt: "<p><b>How much arousal do you feel in your body right now?</b><br>"+
             "Move the slider with the arrow keys and press spacebar to continue</p>",
+    post_trial_gap: 500,
     on_finish: function(data){
         pData.Arousal = data.response;
         //saveSessionData2(pData.Block + "_Arousal");        

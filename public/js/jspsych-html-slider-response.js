@@ -190,6 +190,12 @@ jsPsych.plugins['html-slider-response'] = (function() {
     function end_trial(){
       jsPsych.pluginAPI.clearAllTimeouts();
 
+    // kill keyboard listeners
+    if (typeof keyboardListener !== 'undefined') {
+      jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
+    }
+
+
       // save data
       var trialdata = {
         rt: response.rt,
