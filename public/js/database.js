@@ -93,6 +93,7 @@ var pData = {
 
 function saveSessionData2(blockName = ""){
     pData.Block = blockName;    
+    pData.Time= now();
     firebase.database().ref('sessions/' + pData.AuthId + '/' + pData.EventNum).set(pData);
     pData.EventNum = pData.EventNum + 1;
 }
